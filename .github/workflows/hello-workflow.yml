@@ -8,9 +8,15 @@ on: push
 # Jobs
 jobs:
     say-hello:
+        name: Begrüße Teilnehmer
         runs-on: ubuntu-latest
 
         steps:
-            - run: pwd && ls -al
-            - uses: actions/checkout@v6
-            - run: pwd && ls -al
+            - name: Aktuelles Verzeichnis ansehen
+              run: pwd && ls -al
+            
+            - name: Daten laden
+              uses: actions/checkout@v6
+            
+            - name: Aktuelles Verzeichnis ansehen
+              run: pwd && ls -al
