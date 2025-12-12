@@ -16,6 +16,12 @@ jobs:
              run: |
               echo "Geheimnis lautet: ${{ secrets.MY_SECRET }}"
 
+           - name: Secret auf Datev prüfen
+             env:
+                GEHEIM: ${{ secrets.MY_SECRET }}"
+             if: env.GEHEIM == 'I love Datev!'
+             run: echo "Viel liebe für Datev!"
+
            - name: Zeige GitHub Kontext
              run: echo '${{ toJson(github) }}'
 
