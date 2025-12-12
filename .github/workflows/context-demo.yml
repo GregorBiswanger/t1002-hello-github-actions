@@ -28,7 +28,7 @@ jobs:
 
            - name: Secret auf Datev prüfen
              env:
-                GEHEIM: ${{ secrets.MY_SECRET }}"
+                GEHEIM: ${{ secrets.MY_SECRET }}
              if: env.GEHEIM == 'I love Datev'
              run: echo "Viel liebe für Datev!"
 
