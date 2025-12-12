@@ -20,3 +20,11 @@ jobs:
             
             - name: Aktuelles Verzeichnis ansehen
               run: pwd && ls -al
+
+    say-goodbye:
+        name: Abschied
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Abschied ausgabe
+            run: echo "Bye bye"
