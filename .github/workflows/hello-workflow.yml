@@ -1,0 +1,14 @@
+# Workflow konfiguration (Metadaten)
+name: Hello World
+description: Das ist nur ein Hello World Beispiel
+
+# Events
+on: push 
+
+# Jobs
+jobs:
+    say-hello:
+        runs-on: ubuntu-latest
+
+        steps:
+            - run: pwd && ls -al
