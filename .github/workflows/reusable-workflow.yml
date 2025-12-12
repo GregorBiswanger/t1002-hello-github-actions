@@ -1,0 +1,16 @@
+name: Wiederverwendbarer Workflow
+
+on:
+    workflow_call: 
+        inputs:
+            name:
+                required: true
+                type: string
+
+jobs:
+    hello:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Begrüßung
+              run: echo "Hallo ${{inputs.name}}"
