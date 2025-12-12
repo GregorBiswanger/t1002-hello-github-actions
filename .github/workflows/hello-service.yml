@@ -1,0 +1,33 @@
+name: CI mit Service-Container
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+        hello-service:
+            image: nginx:alpine
+            ports:
+            - 8080:80
+            options: >-
+                --health-cmd "sh -c 'apk add --no-cache curl >/dev/null && curl -f http://localhost:80 || exit 1'"
+                --health-interval 10s
+                --health-timeout 5s
+                --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy Hello World to Nginx service
+        run: |
+          echo "Hello World from service!" > index.html
+          docker cp index.html ${{ job.services.hello-service.id }}:/usr/share/nginx/html/index.html
+
+      - name: Test service is reachable
+        run: |
+          curl -s http://localhost:8080 | grep "Hello World from service!"
