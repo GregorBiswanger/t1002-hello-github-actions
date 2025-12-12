@@ -18,3 +18,10 @@ jobs:
 
            - name: Zeige Runner Kontext
              run: echo '${{ toJson(runner) }}'
+
+           - name: Commit Message lesen
+             id: get_secret_message
+             run: echo "message=Wuhuu!" >> "$GITHUB_OUTPUT"
+
+           - name: Zeige Steps Kontext
+             run: echo '${{ toJson(steps) }}'
