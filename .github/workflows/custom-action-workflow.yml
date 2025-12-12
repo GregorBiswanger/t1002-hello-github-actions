@@ -1,0 +1,25 @@
+name: Test Action
+
+on:
+    push:
+    workflow_dispatch:
+
+jobs:
+    hello:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Abhängigkeiten installieren
+              run: npm install
+              working-directory: ./.github/actions/custom-action-js
+
+            - name: Action ausführen
+              id: action-call
+              uses: ./.github/actions/custom-action-js
+              with:
+                name: 'Datev'
+
+            - name: Zeit ausgeben
+              run: echo "Die aktuelle Zeit ist ${{ steps.action-call.outputs.time }}"
