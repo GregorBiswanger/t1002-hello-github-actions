@@ -24,6 +24,7 @@ jobs:
     say-goodbye:
         name: Abschied
         runs-on: ubuntu-latest
+        needs: say-hello
 
         steps:
           - name: Abschied ausgabe
