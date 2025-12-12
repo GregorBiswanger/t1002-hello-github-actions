@@ -3,12 +3,21 @@ name: Context Demo
 on: 
     push:
     workflow_dispatch:
+      inputs:
+        environment:
+          description: Umgebung festlegen
+          required: true
+          default: 'Development'
+          type: choice
+          options:
+            - Production
+            - Development
 
 jobs:
     analysis:
         name: Erste Analyse
         runs-on: ubuntu-latest
-        environment: Production
+        environment: ${{ github.event.inputs.environment }}
         outputs:
             secret-message: ${{ steps.get_secret_message.outputs.message }}
 
@@ -28,7 +37,7 @@ jobs:
                 GEHEIM: ${{ secrets.MY_SECRET }}
              if: env.GEHEIM == 'I really love Datev'
              run: echo "Viel liebe für Datev (Production Version)"
-             
+
            - name: Zeige GitHub Kontext
              run: echo '${{ toJson(github) }}'
 
