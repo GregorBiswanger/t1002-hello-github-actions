@@ -8,6 +8,8 @@ jobs:
     analysis:
         name: Erste Analyse
         runs-on: ubuntu-latest
+        outputs:
+            secret-message: ${{ steps.get_secret_message.outputs.message }}
 
         steps:
            - name: Zeige GitHub Kontext
@@ -25,3 +27,13 @@ jobs:
 
            - name: Zeige Steps Kontext
              run: echo '${{ toJson(steps) }}'
+
+    job2:
+        name: Zeige Werte aus Job 1 (Analysis)
+        runs-on: ubuntu-latest
+        needs: analysis
+
+        steps:
+            - name: Outputs anzeigen
+              run: |
+                echo "Geheime Message aus Job 1: ${{ needs.analysis.outputs.secret-message }}"
